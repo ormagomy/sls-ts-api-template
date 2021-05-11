@@ -1,0 +1,20 @@
+[
+  {
+    "id": "30d4531a-4b93-4bae-82a3-b258132bd4ca",
+    "teamName": "Thunder",
+    "name": "Kevin Durant",
+    "description": "Ex player",
+    "tags": [{ "name": "OKCT" }],
+    "createdAt": 1567799316855,
+    "updatedAt": 1567799325268
+  },
+  {
+    "id": "7b5cf1d8-64c3-4c82-8b22-86b41639c3a3",
+    "teamName": "Thunder",
+    "name": "Moses Brown",
+    "description": "Center",
+    "tags": [{ "name": "OKCT" }],
+    "createdAt": 1567799316855,
+    "updatedAt": 1567799325268
+  }
+]

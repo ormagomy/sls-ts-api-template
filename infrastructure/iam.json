@@ -1,0 +1,86 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "VisualEditor0",
+      "Effect": "Allow",
+      "Action": [
+        "logs:DeleteSubscriptionFilter",
+        "logs:DescribeLogStreams",
+        "cloudformation:DescribeStackResource",
+        "apigateway:DELETE",
+        "logs:CreateLogStream",
+        "iam:PassRole",
+        "apigateway:UpdateRestApiPolicy",
+        "cloudformation:DescribeStackEvents",
+        "apigateway:PATCH",
+        "cloudformation:UpdateStack",
+        "lambda:DeleteFunction",
+        "logs:FilterLogEvents",
+        "apigateway:GET",
+        "logs:DescribeLogGroups",
+        "logs:DeleteLogGroup",
+        "apigateway:PUT",
+        "lambda:InvokeFunction",
+        "lambda:Update*",
+        "cloudformation:DescribeStackResources",
+        "logs:PutLogEvents",
+        "lambda:AddPermission",
+        "cloudformation:CreateStack",
+        "cloudformation:DeleteStack",
+        "lambda:PublishVersion",
+        "logs:PutSubscriptionFilter",
+        "apigateway:POST",
+        "lambda:RemovePermission",
+        "lambda:CreateAlias"
+      ],
+      "Resource": [
+        "arn:aws:logs:*:*:*",
+        "arn:aws:apigateway:*::*",
+        "arn:aws:lambda:*:*:function:sls-ts-api-template-*-*",
+        "arn:aws:iam::*:role/*",
+        "arn:aws:cloudformation:*:*:stack/sls-ts-api-template-*/*"
+      ]
+    },
+    {
+      "Sid": "VisualEditor1",
+      "Effect": "Allow",
+      "Action": [
+        "lambda:List*",
+        "lambda:*",
+        "lambda:Get*",
+        "dynamodb:*",
+        "cloudformation:List*",
+        "cloudwatch:GetMetricStatistics",
+        "cloudformation:ValidateTemplate",
+        "cloudformation:Get*",
+        "cloudformation:DescribeStacks"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "VisualEditor2",
+      "Effect": "Allow",
+      "Action": "s3:*",
+      "Resource": "arn:aws:s3:::sls-ts-api-template*"
+    },
+    {
+      "Sid": "VisualEditor3",
+      "Effect": "Allow",
+      "Action": "logs:CreateLogGroup",
+      "Resource": "arn:aws:logs:*:*:*"
+    },
+    {
+      "Sid": "VisualEditor4",
+      "Effect": "Allow",
+      "Action": "cloudformation:CreateUploadBucket",
+      "Resource": "arn:aws:cloudformation:*:*:stack/sls-ts-api-template-*/*"
+    },
+    {
+      "Sid": "VisualEditor5",
+      "Effect": "Allow",
+      "Action": "iam:*",
+      "Resource": "arn:aws:iam::*:role/sls-ts-api-template-*-lambdaRole"
+    }
+  ]
+}
