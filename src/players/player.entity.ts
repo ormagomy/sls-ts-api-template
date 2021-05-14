@@ -3,11 +3,11 @@ import { Document } from 'dynamoose/dist/Document';
 import { v4 as uuid } from 'uuid';
 
 export class PlayerType extends Document {
-  id!: string;
-  teamName!: string;
-  name!: string;
+  id: string;
+  teamName: string;
+  name: string;
   description?: string;
-  tags!: [{ name: string }];
+  tags: [{ name: string }];
 }
 
 const PlayerSchema = new Schema(
