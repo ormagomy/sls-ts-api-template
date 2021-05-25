@@ -10,8 +10,8 @@
     "dynamodb:start": "sls dynamodb start --stage local",
     "dynamodb:remove": "sls dynamodb remove --stage local",
     "format": "prettier --write './{,**/}*.[jt]s'",
-    "start": "SLS_DEBUG=* AWS_REGION=us-west-2 NODE_ENV=LOCAL sls offline start --stage local",
-    "start:debug": "AWS_REGION=us-west-2 NODE_ENV=LOCAL node --inspect=9220 ./node_modules/serverless/bin/serverless.js offline start --stage local",
+    "start": "sls offline start --stage local",
+    "start:debug": "node --inspect=9220 ./node_modules/serverless/bin/serverless.js offline start --stage local",
     "logs:dev": "sls logs -f app -t --startTime 10m --stage dev"
   },
   "dependencies": {

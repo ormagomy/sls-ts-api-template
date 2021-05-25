@@ -17,9 +17,6 @@ export const deleteOne = async (id: string) => {
   return playerRepository.deleteOne(id);
 };
 
-/**
- * Get all players for a team. The queryParam must contain a teamName.
- */
 export const getAll = async (queryParam: Partial<PlayerType>) => {
   return playerRepository.getAll(queryParam);
 };

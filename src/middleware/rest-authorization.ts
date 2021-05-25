@@ -2,8 +2,9 @@ import { RequestHandler } from 'express';
 
 export const restAuthorization: RequestHandler = (req, res, next) => {
   if (
-    // Support REST authZ. Having support for headers is nice to help hide the token.
-    req.headers.authorization === process.env.API_TOKEN
+    // Support simple REST authentication with a list of allowed API tokens.
+    req.headers.authorization &&
+    process.env.API_TOKENS?.split(',').includes(req.headers.authorization)
   ) {
     next();
   } else {

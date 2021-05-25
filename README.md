@@ -29,7 +29,6 @@ This template can be used to scaffold out a basic Serverless REST API.
 
 ## TODO
 
-- Use dotenv for environment config
 - Think about authentication using `provider.apiGateway.apikeys` [docs](https://www.serverless.com/framework/docs/providers/aws/events/apigateway/)
 - Authorization
 - Add graphql API
