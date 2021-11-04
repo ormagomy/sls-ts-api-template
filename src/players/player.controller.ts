@@ -13,8 +13,8 @@ export const update = async (player: PlayerType) => {
   return playerRepository.update(player);
 };
 
-export const deleteOne = async (id: string) => {
-  return playerRepository.deleteOne(id);
+export const deleteById = async (id: string) => {
+  return playerRepository.deleteById(id);
 };
 
 export const getAll = async (queryParam: Partial<PlayerType>) => {

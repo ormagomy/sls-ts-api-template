@@ -45,7 +45,7 @@ router.put(
 router.delete(
   `/:id(${uuidV4Regex})`,
   wrapAsync(async ({ params: { id } }, res) => {
-    await playerController.deleteOne(id);
+    await playerController.deleteById(id);
     return res.end();
   })
 );

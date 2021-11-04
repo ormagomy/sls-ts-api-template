@@ -67,7 +67,7 @@ export const update = async (player: PlayerType): Promise<PlayerType> => {
 /**
  * Deletes a single item by id. Throws an error is it does not exist.
  */
-export const deleteOne = async (id: string): Promise<void> => {
+export const deleteById = async (id: string): Promise<void> => {
   await validateExists(id);
   return playerDb.delete({ id });
 };
