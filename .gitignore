@@ -67,5 +67,7 @@ config
 .dynamodb
 .idea
 .build
+.webpack
+.config
 
 helper-scripts/dynamo-dump-to-seed/node_modules/

@@ -12,9 +12,11 @@
     "strictNullChecks": true,
     "strict": true,
     "strictPropertyInitialization": false,
-    "outDir": ".build",
+    "forceConsistentCasingInFileNames": true,
+    // "outDir": ".build",
     "rootDir": "./"
   },
+  "files": ["src/@types/graphql.d.ts"],
   "include": ["src"],
   "exclude": ["node_modules", ".build"]
 }
