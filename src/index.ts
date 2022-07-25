@@ -17,7 +17,7 @@ import expressJWT from 'express-jwt';
 aws.sdk.config.update({
   region: process.env.AWS_REGION,
 });
-if (process.env.NODE_ENV === 'LOCAL') {
+if (process.env.NODE_ENV === 'development') {
   aws.ddb.local(`http://localhost:${process.env.DYNAMODB_LOCAL_PORT}`);
 }
 
