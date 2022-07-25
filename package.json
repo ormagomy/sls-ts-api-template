@@ -6,6 +6,7 @@
   "main": "src/index.js",
   "scripts": {
     "build": "sls package",
+    "doctor": "sls doctor",
     "deploy": "sls deploy",
     "deploy:prod": "sls deploy --stage prod",
     "dev:init": "sls dynamodb install",

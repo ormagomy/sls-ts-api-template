@@ -1,5 +1,6 @@
 service: sls-ts-api-template
 useDotenv: true
+configValidationMode: error
 
 # Pin the service to only deploy with a specific Serverless version
 frameworkVersion: '3'
@@ -42,25 +43,26 @@ custom:
 provider:
   name: aws
   runtime: nodejs14.x
-  lambdaHashingVersion: 20201221
   stage: ${opt:stage, 'dev'}
   region: us-west-2
   profile: sls-ts-api-template
 
   # you can add statements to the Lambda function's IAM Role here
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:Query
-        - dynamodb:Scan
-        - dynamodb:GetItem
-        - dynamodb:PutItem
-        - dynamodb:UpdateItem
-        - dynamodb:DeleteItem
-        - dynamodb:DescribeTable
-      Resource:
-        - !Sub '${PlayersDynamoDBTable.Arn}'
-        - !Sub '${PlayersDynamoDBTable.Arn}/index/*'
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+            - dynamodb:DescribeTable
+          Resource:
+            - !Sub '${PlayersDynamoDBTable.Arn}'
+            - !Sub '${PlayersDynamoDBTable.Arn}/index/*'
   environment:
     STAGE: ${self:provider.stage}
     # The port that dynamodb is running on when running locally
@@ -79,7 +81,9 @@ functions:
     handler: src/index.handler
     events:
       - http: ANY /
-      - http: 'ANY {proxy+}'
+      - http:
+          path: /{proxy+} # this matches any path, the token 'any' doesn't mean anything special
+          method: ANY
 
 resources:
   Resources:
