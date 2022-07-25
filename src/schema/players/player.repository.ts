@@ -1,17 +1,12 @@
-import { ModelType } from 'dynamoose/dist/General';
-import { EntityNotFound } from '../middleware/error';
-import { logger } from '../middleware/logging/application.logger';
-import { playerDbFactory, PlayerType } from './player.entity';
-
-const playerDb: ModelType<PlayerType> = playerDbFactory({
-  tableName: process.env.PLAYERS_TABLE!,
-});
+import { EntityNotFound } from '../../middleware/error';
+import { logger } from '../../middleware/logging/application.logger';
+import { PlayerEntity, PlayerModel } from './player.entity';
 
 /**
  * Check if a player exists with the given id
  */
 const exists = async (id: string): Promise<boolean> => {
-  const existing = await playerDb.get({ id });
+  const existing = await PlayerModel.get({ id });
   return Boolean(existing);
 };
 
@@ -30,27 +25,27 @@ const validateExists = async (id: string): Promise<void> => {
 /**
  * Creates a new player.
  */
-export const create = async (player: PlayerType): Promise<PlayerType> => {
+export const create = async (player: PlayerEntity): Promise<PlayerEntity> => {
   logger.info(`Create new player name = ${player.name}`);
-  return playerDb.create(player, { overwrite: false });
+  return PlayerModel.create(player, { overwrite: false });
 };
 
 /**
  * Get a player by id.
  */
-export const get = async (id: string): Promise<PlayerType> => {
+export const get = async (id: string): Promise<PlayerEntity> => {
   logger.info(`Get player by id = ${id}`);
   await validateExists(id);
 
-  return await playerDb.get({ id });
+  return await PlayerModel.get({ id });
 };
 
 /**
  * Updates an existing player. Throws an error if it does not exist.
  */
-export const update = async (player: PlayerType): Promise<PlayerType> => {
+export const update = async (player: PlayerEntity): Promise<PlayerEntity> => {
   logger.info(`Update player by id = ${player.id}`);
-  const existingPlayer = await playerDb.get({
+  const existingPlayer = await PlayerModel.get({
     id: player.id,
   });
 
@@ -61,7 +56,7 @@ export const update = async (player: PlayerType): Promise<PlayerType> => {
   }
 
   logger.info(`Found player by id = ${existingPlayer.id}`);
-  return playerDb.update(player);
+  return PlayerModel.update(player);
 };
 
 /**
@@ -69,7 +64,7 @@ export const update = async (player: PlayerType): Promise<PlayerType> => {
  */
 export const deleteById = async (id: string): Promise<void> => {
   await validateExists(id);
-  return playerDb.delete({ id });
+  return PlayerModel.delete({ id });
 };
 
 /**
@@ -77,13 +72,12 @@ export const deleteById = async (id: string): Promise<void> => {
  */
 export const getAll = async ({
   teamName,
-}: Partial<PlayerType>): Promise<PlayerType[]> => {
+}: Partial<PlayerEntity>): Promise<PlayerEntity[]> => {
   if (!teamName) {
     throw new Error('Missing required param: teamName');
   }
 
-  const players = await playerDb
-    .query({ teamName })
+  const players = await PlayerModel.query({ teamName })
     // .where('createdAt')
     // .gt(1567799316854)
     // .sort('descending')

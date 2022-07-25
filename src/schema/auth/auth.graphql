@@ -1,0 +1,12 @@
+extend type Mutation {
+  authenticate(auth: AuthInput!): AuthResponse!
+}
+
+input AuthInput {
+  username: String!
+  password: String
+}
+
+type AuthResponse {
+  token: String!
+}

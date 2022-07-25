@@ -1,0 +1,51 @@
+extend type Query {
+  players(teamName: String!): [Player!]!
+}
+
+extend type Mutation {
+  """
+  Create a new player with the given data.
+  """
+  createPlayer(player: CreatePlayerInput!): Player!
+  """
+  Update an existing player.
+  """
+  updatePlayer(player: UpdatePlayerInput!): Player!
+  """
+  Delete a player by the given ID.
+  """
+  deletePlayer(id: ID!): Void
+}
+
+type Player {
+  id: String!
+  teamName: String!
+  name: String!
+  description: String
+  tags: [Tag!]!
+  createdAt: Float!
+  updatedAt: Float!
+}
+
+type Tag {
+  name: String!
+}
+
+input CreatePlayerInput {
+  teamName: String!
+  name: String!
+  description: String
+  tags: [TagInput!]!
+}
+
+input UpdatePlayerInput {
+  id: String!
+  teamName: String
+  name: String
+  description: String
+  tags: [TagInput!]
+}
+
+input TagInput {
+  name: String!
+}

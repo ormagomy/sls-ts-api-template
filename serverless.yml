@@ -69,6 +69,8 @@ provider:
     LOGGING_LEVEL: ${env:LOGGING_LEVEL}
     # API tokens must be a comma separated list
     API_TOKENS: ${env:API_TOKENS}
+    # JWT secret signing key
+    JWT_SECRET: ${env:JWT_SECRET_${self:provider.stage}}
 
 functions:
   app:

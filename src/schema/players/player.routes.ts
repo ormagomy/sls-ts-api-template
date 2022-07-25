@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { wrapAsync } from '../lib/wrap-async';
+import { wrapAsync } from '../../lib/wrap-async';
 import * as playerController from './player.controller';
 
 const hex = '[0-9A-Fa-f]';

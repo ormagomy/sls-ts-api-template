@@ -1,0 +1,9 @@
+"""
+Entry point to the schema.
+This is purposefully empty because it will be extended by other modules.
+"""
+type Query
+
+type Mutation {
+  _empty: String
+}

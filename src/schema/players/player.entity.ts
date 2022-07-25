@@ -1,13 +1,14 @@
 import { model, NULL, Schema } from 'dynamoose';
 import { Document } from 'dynamoose/dist/Document';
+import { ModelType } from 'dynamoose/dist/General';
 import { v4 as uuid } from 'uuid';
 
-export class PlayerType extends Document {
+export class PlayerEntity extends Document {
   id: string;
   teamName: string;
   name: string;
   description?: string;
-  tags: [{ name: string }];
+  tags: { name: string }[];
 }
 
 const PlayerSchema = new Schema(
@@ -46,6 +47,7 @@ const PlayerSchema = new Schema(
   }
 );
 
-export const playerDbFactory = ({ tableName }: { tableName: string }) => {
-  return model<PlayerType>(tableName, PlayerSchema);
-};
+export const PlayerModel: ModelType<PlayerEntity> = model<PlayerEntity>(
+  process.env.PLAYERS_TABLE!,
+  PlayerSchema
+);
