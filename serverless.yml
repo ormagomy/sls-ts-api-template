@@ -1,13 +1,13 @@
 service: sls-ts-api-template
 useDotenv: true
 
+# Pin the service to only deploy with a specific Serverless version
+frameworkVersion: '3'
+
 plugins:
   - serverless-dynamodb-local
   - serverless-webpack
   - serverless-offline
-
-# Pin the service to only deploy with a specific Serverless version
-frameworkVersion: '2'
 
 package:
   individually: true
@@ -36,10 +36,12 @@ custom:
               ]
   webpack:
     packager: npm
+  serverless-offline:
+    httpPort: 3000
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs14.x
   lambdaHashingVersion: 20201221
   stage: ${opt:stage, 'dev'}
   region: us-west-2

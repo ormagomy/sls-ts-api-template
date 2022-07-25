@@ -2,6 +2,7 @@ import cors from 'cors';
 import { aws } from 'dynamoose';
 import express from 'express';
 import { graphqlHTTP } from 'express-graphql';
+import { expressjwt as jwt } from 'express-jwt';
 import serverless from 'serverless-http';
 import { handleKnownErrors, uncaughtErrorHandler } from './middleware/error';
 import { playground } from './middleware/graphql-playground';
@@ -11,7 +12,6 @@ import { restAuthorization } from './middleware/rest-authorization';
 import { schema } from './schema';
 import * as playerRepository from './schema/players/player.repository';
 import { router as playerRouter } from './schema/players/player.routes';
-import expressJWT from 'express-jwt';
 
 // Dynamoose config
 aws.sdk.config.update({
@@ -44,7 +44,7 @@ app.use('/v1/players', jsonParser, restAuthorization, playerRouter);
  */
 app.use(
   '/gql',
-  expressJWT({
+  jwt({
     secret: process.env.JWT_SECRET!,
     algorithms: ['HS256'],
     // This allows for unauthenticatd access, but permissions are verified by the shield on a per-resolver basis.
@@ -53,10 +53,11 @@ app.use(
   jsonParser,
   graphqlHTTP((req) => ({
     schema,
+    // graphiql is not enabled on this because it is loaded below
     graphiql: false,
     context: {
       // @ts-ignore
-      user: req.user || null,
+      user: req.auth || null,
       db: {
         players: playerRepository,
       },
